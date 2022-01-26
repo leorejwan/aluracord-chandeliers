@@ -61,6 +61,9 @@ export default function ChatPage() {
                                 console.log(valor);
                                 setMensagem(valor);
                             }}
+                            onKeyPress={(event) => {
+                                console.log(event);
+                            }}      
                             placeholder="Insira sua mensagem aqui..."
                             type="textarea"
                             styleSheet={{
