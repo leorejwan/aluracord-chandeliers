@@ -6,7 +6,13 @@ export default function ChatPage() {
     const [mensagem, setMensagem] = React.useState('');
     const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
     
-    function handleNovaMensagem(){
+    function handleNovaMensagem(novaMensagem){
+        const mensagem = {
+            id: listaDeMensagens.length + 1,
+            de: 'leo',
+            texto: novaMensagem
+
+        }
         setListaDeMensagens([
             ...listaDeMensagens,
             mensagem
@@ -54,8 +60,8 @@ export default function ChatPage() {
                     {listaDeMensagens.map((mensagemAtual) => {
                         console.log(mensagemAtual);
                         return (
-                            <li>
-                                {mensagemAtual}
+                            <li key={mensagemAtual.id}>
+                                {mensagemAtual.de}: {mensagemAtual.texto}
                             </li>
                         )
                     })}
@@ -77,7 +83,7 @@ export default function ChatPage() {
                             onKeyPress={(event) => {
                                 if(event.key === 'Enter'){
                                     event.preventDefault();
-                                    handleNovaMensagem();
+                                    handleNovaMensagem(mensagem);
                                 }
                             }}      
                             placeholder="Insira sua mensagem aqui..."
