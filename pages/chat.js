@@ -14,8 +14,8 @@ export default function ChatPage() {
 
         }
         setListaDeMensagens([
-            ...listaDeMensagens,
-            mensagem
+            mensagem,
+            ...listaDeMensagens
         ]);
         setMensagem('');
     }
