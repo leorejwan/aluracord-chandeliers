@@ -5,9 +5,15 @@ import appConfig from '../config.json';
 export default function ChatPage() {
     const [mensagem, setMensagem] = React.useState('');
     const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
-    // Sua lógica vai aqui
+    
+    function handleNovaMensagem(){
+        setListaDeMensagens([
+            ...listaDeMensagens,
+            mensagem
+        ]);
+        setMensagem('');
+    }
 
-    // ./Sua lógica vai aqui
     return (
         <Box
             styleSheet={{
@@ -70,12 +76,8 @@ export default function ChatPage() {
                             }}
                             onKeyPress={(event) => {
                                 if(event.key === 'Enter'){
-                                    console.log(event);
-                                    setListaDeMensagens([
-                                        ...listaDeMensagens,
-                                        mensagem
-                                    ]);
-                                    setMensagem('');
+                                    event.preventDefault();
+                                    handleNovaMensagem();
                                 }
                             }}      
                             placeholder="Insira sua mensagem aqui..."
