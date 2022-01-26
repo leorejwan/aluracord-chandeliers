@@ -4,7 +4,7 @@ import appConfig from '../config.json';
 
 export default function ChatPage() {
     const [mensagem, setMensagem] = React.useState('');
-    const [listaDeMensagens, setListaDeMensagens] = React.useState('');
+    const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
     // Sua lógica vai aqui
 
     // ./Sua lógica vai aqui
@@ -45,9 +45,14 @@ export default function ChatPage() {
                         padding: '16px',
                     }}
                 >
-
-                    {/* <MessageList mensagens={[]} /> */}
-                    Mensagens: {listaDeMensagens}
+                    {listaDeMensagens.map((mensagemAtual) => {
+                        console.log(mensagemAtual);
+                        return (
+                            <li>
+                                {mensagemAtual}
+                            </li>
+                        )
+                    })}
 
                     <Box
                         as="form"
