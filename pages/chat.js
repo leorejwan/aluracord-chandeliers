@@ -1,9 +1,20 @@
 import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 import React from 'react';
 import appConfig from '../config.json';
+import { createClient } from '@supabase/supabase-js'; 
 
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzMxNDM5MiwiZXhwIjoxOTU4ODkwMzkyfQ.pBNnMZAQ3ZM4g3snOmDbWTEOq_dfpAwLEx9ehIItpcM'
 const SUPABASE_URL = 'https://elrltzfnxhdvsbtzomqg.supabase.co'
+const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+const dadosDoSupabase = supabaseClient
+        .from('Mensagens')
+        .select('*')
+        .then((dados) => {
+            console.log('Dados da Consulta', dados);
+        });
+
+console.log(dadosDoSupabase);
 
 export default function ChatPage() {
     const [mensagem, setMensagem] = React.useState('');
