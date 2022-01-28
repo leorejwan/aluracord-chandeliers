@@ -2,12 +2,21 @@ import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 import React from 'react';
 import appConfig from '../config.json';
 import { createClient } from '@supabase/supabase-js'; 
+import { useRouter } from 'next/router';
 
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzMxNDM5MiwiZXhwIjoxOTU4ODkwMzkyfQ.pBNnMZAQ3ZM4g3snOmDbWTEOq_dfpAwLEx9ehIItpcM'
 const SUPABASE_URL = 'https://elrltzfnxhdvsbtzomqg.supabase.co'
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
 export default function ChatPage() {
+    const roteamento = useRouter();
+    const usuarioLogado = roteamento.query.username;
+
+    console.log('Usuario logado:', usuarioLogado);
+    console.log('roteamento query', roteamento.query.username)
+
+
+
     const [mensagem, setMensagem] = React.useState('');
     const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
 
@@ -25,7 +34,7 @@ export default function ChatPage() {
     function handleNovaMensagem(novaMensagem) {
         const mensagem = {
             // id: listaDeMensagens.length + 1,
-            de: 'leo',
+            de: usuarioLogado,
             texto: novaMensagem
 
         }

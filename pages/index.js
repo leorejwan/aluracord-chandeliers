@@ -20,7 +20,7 @@ function Titulo(props){
 
 export default function PaginaInicial() {
     const [username, setUsername] = react.useState('leorejwan');
-    const roteamento = useRouter();
+    const roteamento = useRouter(); //envolve mudança de telas e manipulação da URL
 
     return (
       <>
