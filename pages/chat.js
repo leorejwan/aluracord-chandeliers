@@ -15,22 +15,33 @@ export default function ChatPage() {
         supabaseClient
         .from('Mensagens')
         .select('*')
-        .then((dados) => {
-            console.log('Dados da Consulta', dados);
+        .then(({ data }) => {
+            console.log('Dados da Consulta', data);
+            setListaDeMensagens(data)
         });
-    }, [listaDeMensagens])
+    }, [])
 
     function handleNovaMensagem(novaMensagem) {
         const mensagem = {
-            id: listaDeMensagens.length + 1,
+            // id: listaDeMensagens.length + 1,
             de: 'leo',
             texto: novaMensagem
 
         }
-        setListaDeMensagens([
-            mensagem,
-            ...listaDeMensagens
-        ]);
+
+        supabaseClient
+            .from('Mensagens')
+            .insert([
+                mensagem
+            ])
+            .then(({ data }) => {
+                setListaDeMensagens([
+                    data[0],
+                    ...listaDeMensagens
+                ]);
+            })
+
+
         setMensagem('');
     }
 
@@ -172,7 +183,7 @@ function MessageList(props) {
                                     display: 'inline-block',
                                     marginRight: '8px',
                                 }}
-                                src={`https://github.com/vanessametonini.png`}
+                                src={`https://github.com/${mensagem.de}.png`}
                             />
                             <Text tag="strong">
                                 {mensagem.de}
