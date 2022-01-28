@@ -7,18 +7,18 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5v
 const SUPABASE_URL = 'https://elrltzfnxhdvsbtzomqg.supabase.co'
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
-const dadosDoSupabase = supabaseClient
+export default function ChatPage() {
+    const [mensagem, setMensagem] = React.useState('');
+    const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
+
+    React.useEffect(() => {
+        supabaseClient
         .from('Mensagens')
         .select('*')
         .then((dados) => {
             console.log('Dados da Consulta', dados);
         });
-
-console.log(dadosDoSupabase);
-
-export default function ChatPage() {
-    const [mensagem, setMensagem] = React.useState('');
-    const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
+    }, [listaDeMensagens])
 
     function handleNovaMensagem(novaMensagem) {
         const mensagem = {
